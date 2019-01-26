@@ -18,7 +18,7 @@ dic_len = len(num_dic)
 
 def pad(array, max_length):
     while len(array) < max_length:
-        array.append(2)
+        array.append(1)
     return array
 
 
@@ -84,10 +84,10 @@ if ckpt and tf.train.checkpoint_exists(ckpt.model_checkpoint_path):
     saver.restore(sess, ckpt.model_checkpoint_path)
 else:
     sess.run(tf.global_variables_initializer())
-        
+
 with open('en2kr.txt', 'r') as f:
     tmp = f.read().splitlines()
-        
+
 seq_data = []
 for line in tmp:
     data = []
@@ -167,7 +167,7 @@ for epoch in range(start_step, total_epoch+1):
                                       targets: test_target,
                                       keep_prob: 1.0})
         writer.add_summary(summary, global_step=sess.run(global_step))
-        
+
         print('=== 테스트 ===')
 
         print('aala ->', predict('aala'))
